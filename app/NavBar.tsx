@@ -1,0 +1,12 @@
+import Link from "next/link";
+
+const NavBar = () => {
+    return (  
+        <div className="flex my-5 bg-slate-200">
+            <Link href={"/"} className="mr-5">Next.js</Link>
+            <Link href={"/users"}>Users</Link>
+        </div>
+    );
+}
+ 
+export default NavBar;
