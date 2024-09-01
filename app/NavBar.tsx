@@ -11,10 +11,13 @@ const NavBar = () => {
             <Link href={"/"} className="mr-5">Next.js</Link>
             <Link href={"/users"}>Users</Link>
             {!isLoading && (
-                // <>
-                    !isAuthenticated ?
+                // <>  
+                !isAuthenticated ?
                     <Link href={"/api/auth/signin"}>Login</Link> :
-                    <h1>Hello {session.user?.name} 👋</h1>
+                    <div className="flex flex-row items-center">
+                        <h1>Hello {session.user?.name} 👋</h1>
+                        <Link href={"/api/auth/signout"}>Sign Out</Link>
+                    </div>
                 // </>
             )}
         </div>
