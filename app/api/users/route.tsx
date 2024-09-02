@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     const user = await prisma.user.findUnique({
-        where: { email: body.email }
+        where: { email: body.email! }
     })
     if (user) {
         return NextResponse.json({ message: "User already registered!" }, { status: 400 })
