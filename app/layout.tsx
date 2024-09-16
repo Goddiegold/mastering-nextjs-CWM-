@@ -4,6 +4,8 @@ import "./globals.css";
 import NavBar from "./NavBar";
 import { Suspense } from "react";
 import AuthProvider from "./auth/Provider";
+import Script from "next/script";
+import ThirdParyScripts from "./ThridPartyScripts";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="winter">
+      <ThirdParyScripts />
       <body className={inter.className}>
         <AuthProvider>
           <NavBar />
