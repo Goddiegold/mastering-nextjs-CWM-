@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
     const { data, error } = await resend.emails.send({
         from: "...",//verifid domain, 
         to: ["gehikhamhen247@gmail.com"],
@@ -14,8 +14,8 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     })
 
     if (error) {
-        return res.status(400).json(error);
+        return NextResponse.json(error, {status:400});
     }
 
-    return res.json({ message: "Successfully!" })
+    return NextResponse.json({ message: "Successfully!" })
 }

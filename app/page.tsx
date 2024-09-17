@@ -3,7 +3,6 @@
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
 import backgroundImage from "@/public/images/backgorund.jpg";
 import { Metadata } from "next";
