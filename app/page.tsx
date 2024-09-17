@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 import { getServerSession } from "next-auth";
@@ -5,6 +7,18 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
 import backgroundImage from "@/public/images/backgorund.jpg";
 import { Metadata } from "next";
+// import HeavyComponent from "./components/HeavyComponent";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+// import _ from "lodash";
+
+const HeavyComponent = dynamic(
+  () => import("./components/HeavyComponent"),
+  {
+    ssr: false,
+    loading: () => <p>Loading</p>
+  }
+)
 
 // export default async function Home() {
 //   const session = await getServerSession(authOptions)
@@ -16,7 +30,8 @@ import { Metadata } from "next";
 //     </>
 //   );
 // }
-export default async function Home() {
+export default function Home() {
+  const [show, setShow] = useState(false)
   return (
     <main className="relative h-screen">
       {/* <Image
@@ -30,7 +45,20 @@ export default async function Home() {
         priority
       /> */}
       <h1 className="font-inter">hello world</h1>
-    </main>
+      <button onClick={async () => {
+        const _ = (await import("lodash")).default
+        const users = [
+          { name: "c" },
+          { name: "b" },
+          { name: "a" }
+        ]
+        const sorted = _.orderBy(users, ["name"])
+        console.log("sorted", sorted)
+      }}>
+        show
+      </button>
+      {/* {show && <HeavyComponent />} */}
+    </main >
   );
 }
 
@@ -40,11 +68,11 @@ export default async function Home() {
 // }
 
 //for dynamic content
-export async function generateMetadata(): Promise<Metadata> {
-  const product = await fetch("/api/products")
+// export async function generateMetadata(): Promise<Metadata> {
+//   const product = await fetch("/api/products")
 
-  return {
-    title: "[product.title]",
-    description: "[product.details]"
-  }
-}
+//   return {
+//     title: "[product.title]",
+//     description: "[product.details]"
+//   }
+// }
